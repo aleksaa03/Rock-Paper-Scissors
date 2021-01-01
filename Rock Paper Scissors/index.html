@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="shortcut icon" href="media/rock.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <div class="enter-name" id="enter-name">
+      <div class="name">
+        <h1>Enter a name</h1>
+        <input type="text" name="" id="name" />
+        <p>Press <kbd>Enter</kbd> to start</p>
+      </div>
+    </div>
+    <div class="main-screen" id="main-screen">
+      <h1>Rock, paper, scissors</h1>
+      <div class="icons">
+        <i class="fas fa-hand-rock"></i>
+        <i class="fas fa-hand-rock"></i>
+      </div>
+      <h1>Max score</h1>
+      <div class="counter">
+        <i class="fas fa-minus" onclick="count(1)"></i>
+        <h2 id="max-score">5</h2>
+        <i class="fas fa-plus" onclick="count(2)"></i>
+      </div>
+      <div class="start">
+        <button onclick="start()">Start</button>
+      </div>
+      <h2 id="welcome"></h2>
+    </div>
+    <div class="game" id="game">
+      <div class="scores">
+        <div class="player-score">
+          <h1 id="player"></h1>
+          <h2 id="p-score">0</h2>
+        </div>
+        <div class="computer-score">
+          <h1>Computer</h1>
+          <h2 id="c-score">0</h2>
+        </div>
+      </div>
+      <div class="hands" id="hands">
+        <i class="fas fa-hand-rock hand" id="p-hand"></i>
+        <i class="fas fa-hand-rock hand" id="c-hand"></i>
+      </div>
+      <div class="buttons-options">
+        <button onclick="play('rock')" class="player-option">
+          <i class="fas fa-hand-rock"></i>
+        </button>
+        <button onclick="play('paper')" class="player-option">
+          <i class="fas fa-hand-paper"></i>
+        </button>
+        <button onclick="play('scissors')" class="player-option">
+          <i class="fas fa-hand-scissors"></i>
+        </button>
+      </div>
+    </div>
+    <div class="winner" id="winner"></div>
+    <div class="scoresTable" id="scores">
+      <div class="score">
+        <i class="fas fa-times" onclick="exit()"></i>
+        <table>
+          <tr>
+            <th id="player-score"></th>
+            <th id="computer-score"></th>
+          </tr>
+        </table>
+        <div class="sum">
+          <h2 id="player-sum"></h2>
+          <h2 id="computer-sum"></h2>
+        </div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

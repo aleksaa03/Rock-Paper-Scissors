@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="448.105" viewBox="0 0 512 448.105">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.221" y1="0.561" x2="0.866" y2="1.034" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#a900ff"/>
+      <stop offset="1" stop-color="#50f"/>
+    </linearGradient>
+  </defs>
+  <path id="hand-rock-solid" d="M464.8,80A48,48,0,0,0,416,128h-8V96.8c0-26.3-20.9-48.3-47.2-48.8A48,48,0,0,0,312,96v32h-8V80.8c0-26.3-20.9-48.3-47.2-48.8A48,48,0,0,0,208,80v48h-8V96.8c0-26.3-20.9-48.3-47.2-48.8A48,48,0,0,0,104,96V232l-8-7.1V176.8c0-26.3-20.9-48.3-47.2-48.8A48,48,0,0,0,0,176v66.4a96.231,96.231,0,0,0,32.2,71.8l111.7,99.3A48.214,48.214,0,0,1,160,449.4v6.7a23.942,23.942,0,0,0,24,24H424a23.942,23.942,0,0,0,24-24v-2.9a97.422,97.422,0,0,1,7.5-37.3l49-116.3a95.585,95.585,0,0,0,7.5-37.3V128.8C512,102.5,491.1,80.4,464.8,80Z" transform="translate(0 -31.995)" fill="url(#linear-gradient)"/>
+</svg>

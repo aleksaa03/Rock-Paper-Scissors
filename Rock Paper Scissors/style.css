@@ -1,0 +1,341 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+h1,
+h2 {
+  font-weight: 500;
+}
+.main-screen,
+.game,
+.winner .content,
+.enter-name .name,
+.scoresTable .score {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.main-screen .icons i:nth-child(1),
+.game .hands i:nth-child(1),
+.winner .content .move .player i {
+  transform: rotateY(180deg);
+}
+.enter-name {
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 1;
+}
+.enter-name .name {
+  height: 300px;
+  width: 300px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+}
+.enter-name .name h1 {
+  padding-top: 70px;
+}
+.enter-name .name input[type="text"] {
+  height: 20px;
+  width: 150px;
+  padding: 5px;
+  border: none;
+  border-bottom: 2px solid #000000;
+  outline: none;
+  transition: 0.25s;
+}
+.enter-name .name input[type="text"]:focus {
+  width: 250px;
+}
+.enter-name .name h1,
+.name input[type="text"],
+.name p {
+  margin: 10px;
+}
+.main-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.main-screen .icons,
+.main-screen h1,
+.main-screen .start {
+  margin-top: 50px;
+}
+.main-screen .icons i {
+  font-size: 70px;
+  margin: 0 10px;
+}
+.main-screen .counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.main-screen .counter i,
+.counter h2 {
+  margin: 0 20px;
+}
+.main-screen .counter h2 {
+  font-size: 30px;
+}
+.main-screen .counter i {
+  font-size: 25px;
+  cursor: pointer;
+}
+.main-screen .start button {
+  height: 40px;
+  width: 100px;
+  cursor: pointer;
+}
+.main-screen #welcome {
+  position: fixed;
+  bottom: -220px;
+  font-size: 25px;
+}
+.game {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.game .scores {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.game .scores .player-score,
+.scores .computer-score {
+  margin: 0 30px;
+}
+.game .scores {
+  margin-bottom: 50px;
+}
+.game .hands {
+  margin: 20px 0;
+}
+.game .buttons-options {
+  margin-top: 50px;
+}
+.game .hands i {
+  font-size: 100px;
+  margin: 0 50px;
+}
+.game .buttons-options button {
+  height: 45px;
+  width: 100px;
+  background: #e0e0e0;
+  border: none;
+  margin: 0 10px;
+  outline: none;
+  cursor: pointer;
+}
+.game .buttons-options button i {
+  font-size: 25px;
+}
+.winner {
+  display: none;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 1;
+  animation: transition 1s forwards;
+}
+.winner .content {
+  height: 280px;
+  width: 300px;
+  padding: 5px;
+  background: #ffffff;
+  border-radius: 10px;
+  text-align: center;
+}
+.winner .content h2:nth-child(2) {
+  font-size: 20px;
+}
+.winner .content .move,
+h2,
+i,
+button {
+  margin: 10px;
+}
+.winner .content .move {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.winner .content .move .player,
+.move .computer {
+  margin: 0 10px;
+}
+.winner .content .move i {
+  font-size: 50px;
+}
+.winner .content button {
+  height: 40px;
+  width: 100px;
+  cursor: pointer;
+}
+.scoresTable {
+  height: 100%;
+  width: 100%;
+  background: rgb(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 1;
+  display: none;
+  transition: 0.25s;
+}
+.scoresTable .score {
+  height: 400px;
+  width: 400px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: right;
+}
+.scoresTable .score i {
+  font-size: 25px;
+  cursor: pointer;
+}
+.scoresTable .score table {
+  text-align: center;
+  margin: auto;
+  padding: 5px;
+}
+.scoresTable .score table tr,
+th,
+td {
+  padding: 5px;
+  border: 1px solid #000000;
+}
+.scoresTable .score .sum {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.scoresTable .score .sum h2 {
+  font-size: 20px;
+  text-align: center;
+}
+@keyframes transition {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes playerMove {
+  0% {
+    transform: translateY(0px) rotateY(180deg);
+  }
+  25% {
+    transform: translateY(20px) rotateY(180deg);
+  }
+  50% {
+    transform: translateY(0px) rotateY(180deg);
+  }
+  75% {
+    transform: translateY(20px) rotateY(180deg);
+  }
+  100% {
+    transform: translateY(0px) rotateY(180deg);
+  }
+}
+@keyframes computerMove {
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(20px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+@media only screen and (max-width: 768px) {
+  .game {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .main-screen,
+  .game {
+    width: 100%;
+  }
+  .main-screen h1 {
+    font-size: 30px;
+  }
+  .game .hands i {
+    font-size: 90px;
+  }
+}
+@media only screen and (max-width: 420px) {
+  .scoresTable .score {
+    height: 400px;
+    width: 380px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .scoresTable .score {
+    height: 400px;
+    width: 350px;
+  }
+}
+@media only screen and (max-width: 385px) {
+  .game .scores h1,
+  .scores h2 {
+    font-size: 25px;
+  }
+  .game .hands i {
+    font-size: 75px;
+  }
+}
+@media only screen and (max-width: 370px) {
+  .game .buttons-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .game .buttons-options button {
+    margin: 10px;
+  }
+  .scoresTable .score {
+    height: 400px;
+    width: 340px;
+  }
+}
+@media only screen and (max-width: 355px) {
+  .game .hands i {
+    font-size: 65px;
+  }
+}
+@media only screen and (max-width: 335px) {
+  .game .hands i {
+    font-size: 60px;
+  }
+  .scoresTable .score {
+    height: 400px;
+    width: 320px;
+  }
+}
