@@ -18,14 +18,14 @@
     <div class="enter-name" id="enter-name">
       <div class="name">
         <h1>Enter a name</h1>
-        <input type="text" name="" id="name" />
+        <input type="text" name="" id="name" maxlength="10" />
         <p>Press <kbd>Enter</kbd> to start</p>
       </div>
     </div>
     <div class="main-screen" id="main-screen">
       <h1>Rock, paper, scissors</h1>
       <div class="icons">
-        <i class="fas fa-hand-rock"></i>
+        <i class="fas fa-hand-rock player-hand"></i>
         <i class="fas fa-hand-rock"></i>
       </div>
       <h1>Max score</h1>
@@ -36,8 +36,8 @@
       </div>
       <div class="start">
         <button onclick="start()">Start</button>
+        <button onclick="customize()">Customize</button>
       </div>
-      <h2 id="welcome"></h2>
     </div>
     <div class="game" id="game">
       <div class="scores">
@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="hands" id="hands">
-        <i class="fas fa-hand-rock hand" id="p-hand"></i>
+        <i class="fas fa-hand-rock hand player-hand" id="p-hand"></i>
         <i class="fas fa-hand-rock hand" id="c-hand"></i>
       </div>
       <div class="buttons-options">
@@ -67,7 +67,7 @@
       </div>
     </div>
     <div class="winner" id="winner"></div>
-    <div class="scoresTable" id="scores">
+    <div class="scoresTable" id="scores" onclick="exit()">
       <div class="score">
         <i class="fas fa-times" onclick="exit()"></i>
         <table>
@@ -81,6 +81,21 @@
           <h2 id="computer-sum"></h2>
         </div>
       </div>
+    </div>
+    <div class="sounds">
+      <i class="fas fa-volume-up sound" onclick="controlSound()"></i>
+    </div>
+    <div class="customize" id="customize">
+      <div class="custom-hands">
+        <h2>Custom color</h2>
+        <i class="fas fa-hand-rock color-hand"></i>
+        <div class="color-blocks" id="color-blocks"></div>
+      </div>
+      <div class="change-name">
+        <h2>Change name</h2>
+        <input type="text" name="" id="change-name" maxlength="10" />
+      </div>
+      <button onclick="saveChanges()">Save</button>
     </div>
     <script src="app.js"></script>
   </body>

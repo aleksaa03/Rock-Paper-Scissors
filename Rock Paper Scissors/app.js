@@ -81,12 +81,13 @@ function compareMove(playerMove, computerMove) {
   };
 
   if (pScore == maxScore) {
-    win(sessionStorage.getItem("name"), maxScore, computerMove, playerMove);
+    win(localStorage.getItem("name"), maxScore, computerMove, playerMove);
     score.player = pScore;
     score.computer = cScore;
 
     save(score);
     saveRemovedScores(score);
+    sounds("win");
   }
 
   if (cScore == maxScore) {
@@ -96,6 +97,7 @@ function compareMove(playerMove, computerMove) {
 
     save(score);
     saveRemovedScores(score);
+    sounds("lose");
   }
 
   pScoreText.innerHTML = pScore;
@@ -143,8 +145,8 @@ function win(matchWinner, maxScore, cOption, input) {
     <h2>Max score: ${maxScore}</h2>
     <div class="move">
       <div class="player">
-        <h2>${sessionStorage.getItem("name")}</h2>
-        <i class="fas fa-hand-${input}"></i>
+        <h2>${localStorage.getItem("name")}</h2>
+        <i class="fas fa-hand-${input} player-hand-color"></i>
       </div>
       <div class="computer">
         <h2>Computer</h2>
@@ -154,24 +156,32 @@ function win(matchWinner, maxScore, cOption, input) {
     <button onclick="restart()">Restart</button>
     <button onclick="getScores()">Scores</button>
   </div>`;
+  executeColor = true;
+
+  return executeColor;
 }
 
 var enterName = document.getElementById("enter-name");
 var player = document.getElementById("player");
-var welcome = document.getElementById("welcome");
 
 setInterval(function () {
-  if (sessionStorage.getItem("name") != null) {
-    player.innerHTML = sessionStorage.getItem("name");
-    enterName.style.display = "none";
-    welcome.innerHTML = "Welcome, " + sessionStorage.getItem("name");
+  if (localStorage.getItem("name") != null) {
+    player.innerHTML = localStorage.getItem("name");
+    enterName.remove();
+  }
+  if (executeColor == true) {
+    var color = localStorage.getItem("color");
+    var winnerHand = document.querySelector(".player-hand-color");
+    saveColorHand(winnerHand, color);
   }
 });
 
 function getName() {
   var name = document.getElementById("name").value;
-  sessionStorage.setItem("name", name);
-  enterName.style.display = "none";
+  if (name != "") {
+    localStorage.setItem("name", name);
+    enterName.remove();
+  }
 }
 
 function key(e) {
@@ -203,7 +213,7 @@ function getScores() {
 
   var playerScoreTable = document.getElementById("player-score");
   var computerScoreTable = document.getElementById("computer-score");
-  playerScoreTable.innerHTML = sessionStorage.getItem("name");
+  playerScoreTable.innerHTML = localStorage.getItem("name");
   computerScoreTable.innerHTML = "Computer";
 
   var playerSumText = document.getElementById("player-sum");
@@ -235,7 +245,7 @@ function getScores() {
     computerSum += parseInt(removedScores[i].computer);
   }
 
-  playerSumText.innerHTML = `${sessionStorage.getItem("name")}: ${playerSum}`;
+  playerSumText.innerHTML = `${localStorage.getItem("name")}: ${playerSum}`;
   computerSumText.innerHTML = `Computer: ${computerSum}`;
 }
 
@@ -251,4 +261,115 @@ function restart() {
 
 function exit() {
   scoresTable.style.display = "none";
+}
+
+var executeSound = false;
+var sound = document.querySelector(".sound");
+
+function sounds(getSound) {
+  if (!executeSound) {
+    var audio = new Audio("media/" + getSound + ".mp3");
+    audio.play();
+    audio.volume = 0.5;
+  }
+}
+
+function controlSound() {
+  if (sound.className == "fas fa-volume-up sound") {
+    sound.style.color = "#e74c3c";
+    sound.className = "fas fa-volume-mute sound";
+    sessionStorage.setItem("sound", "volume-mute");
+    executeSound = true;
+  } else {
+    sound.style.color = localStorage.getItem("color");
+    sound.className = "fas fa-volume-up sound";
+    sessionStorage.setItem("sound", "volume-up");
+    executeSound = false;
+  }
+
+  return executeSound;
+}
+
+var savedSound = sessionStorage.getItem("sound");
+
+if (savedSound == null || savedSound == "volume-up") {
+  sound.style.color = localStorage.getItem("color");
+  sound.className = "fas fa-volume-up sound";
+  execute = false;
+} else {
+  sound.style.color = "#e74c3c";
+  sound.className = "fas fa-volume-mute";
+  execute = true;
+}
+
+var customizeContainer = document.getElementById("customize");
+var colorBlocks = document.getElementById("color-blocks");
+var changeNameInput = document.getElementById("change-name");
+var colors = ["#000000", "#2ecc71", "#3498db", "#9b59b6", "#f1c40f", "#e74c3c"];
+
+function customize() {
+  mainScreen.style.display = "none";
+  customizeContainer.style.display = "block";
+
+  var removedBlock = document.querySelectorAll(".block");
+
+  removedBlock.forEach((block) => {
+    block.remove();
+  });
+
+  for (var i = 0; i < colors.length; i++) {
+    colorBlocks.innerHTML += `<div class="block" onclick="setColor('${colors[i]}')"></div>`;
+    var block = document.querySelectorAll(".block");
+    block[i].style.background = colors[i];
+  }
+
+  changeNameInput.value = localStorage.getItem("name");
+}
+
+var colorHand = document.querySelector(".color-hand");
+var playerHand = document.querySelectorAll(".player-hand");
+
+function setColor(color) {
+  colorHand.style.color = color;
+  localStorage.setItem("color", color);
+  root.style.setProperty("--globalColor", color);
+  sound.style.color = color;
+}
+
+var root = document.documentElement;
+
+function saveChanges() {
+  for (var i = 0; i < playerHand.length; i++) {
+    playerHand[i].style.color = localStorage.getItem("color");
+  }
+  customizeContainer.style.display = "none";
+  mainScreen.style.display = "flex";
+  root.style.setProperty("--globalColor", localStorage.getItem("color"));
+
+  if (localStorage.getItem("name") != changeNameInput.value && changeNameInput.value != "") {
+    localStorage.setItem("name", changeNameInput.value);
+  }
+}
+
+var savedColor = localStorage.getItem("color");
+
+saveColorHand(colorHand, savedColor);
+
+playerHand.forEach((hand) => {
+  if (savedColor == null) {
+    hand.style.color = "#000000";
+  } else {
+    hand.style.color = savedColor;
+  }
+});
+
+var executeColor = false;
+
+function saveColorHand(hand, savedColor) {
+  if (savedColor == null) {
+    hand.style.color = "#000000";
+  } else {
+    hand.style.color = savedColor;
+  }
+  root.style.setProperty("--globalColor", savedColor);
 }

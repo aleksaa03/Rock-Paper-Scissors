@@ -1,3 +1,6 @@
+:root {
+  --globalColor: #000000;
+}
 * {
   margin: 0;
   padding: 0;
@@ -7,11 +10,15 @@ h1,
 h2 {
   font-weight: 500;
 }
+button {
+  outline: none;
+}
 .main-screen,
 .game,
 .winner .content,
 .enter-name .name,
-.scoresTable .score {
+.scoresTable .score,
+.customize {
   position: absolute;
   top: 45%;
   left: 50%;
@@ -19,7 +26,8 @@ h2 {
 }
 .main-screen .icons i:nth-child(1),
 .game .hands i:nth-child(1),
-.winner .content .move .player i {
+.winner .content .move .player i,
+.customize i {
   transform: rotateY(180deg);
 }
 .enter-name {
@@ -89,15 +97,30 @@ h2 {
   font-size: 25px;
   cursor: pointer;
 }
+.main-screen .start {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .main-screen .start button {
   height: 40px;
-  width: 100px;
+  width: 120px;
+  border-radius: 24px;
+  border: 2px solid var(--globalColor);
   cursor: pointer;
 }
-.main-screen #welcome {
-  position: fixed;
-  bottom: -220px;
-  font-size: 25px;
+.main-screen .start button:nth-child(1) {
+  background: none;
+  transition: 0.25s;
+}
+.main-screen .start button:nth-child(1):hover {
+  background: var(--globalColor);
+  color: #ffffff;
+}
+.main-screen .start button:nth-child(2) {
+  background: var(--globalColor);
+  color: #ffffff;
 }
 .game {
   display: none;
@@ -134,7 +157,6 @@ h2 {
   background: #e0e0e0;
   border: none;
   margin: 0 10px;
-  outline: none;
   cursor: pointer;
 }
 .game .buttons-options button i {
@@ -181,7 +203,15 @@ button {
 .winner .content button {
   height: 40px;
   width: 100px;
+  border-radius: 24px;
+  border: 2px solid var(--globalColor);
+  background: none;
+  transition: 0.25s;
   cursor: pointer;
+}
+.winner .content button:hover {
+  background: var(--globalColor);
+  color: #ffffff;
 }
 .scoresTable {
   height: 100%;
@@ -229,6 +259,72 @@ td {
 .scoresTable .score .sum h2 {
   font-size: 20px;
   text-align: center;
+}
+.sounds {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+  font-size: 30px;
+}
+.sounds i {
+  cursor: pointer;
+  color: #2ecc71;
+  outline: none;
+}
+.customize {
+  display: none;
+  text-align: center;
+}
+.customize .custom-hands,
+.customize .change-name {
+  margin: 50px 0;
+}
+.customize i,
+.customize .color-blocks,
+.customize button {
+  margin: 10px 0;
+}
+.customize i {
+  font-size: 70px;
+}
+.customize .color-blocks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.customize .color-blocks .block {
+  height: 50px;
+  width: 50px;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+.customize .change-name input[type="text"] {
+  height: 20px;
+  width: 150px;
+  padding: 5px;
+  border: none;
+  border-bottom: 2px solid var(--globalColor);
+  outline: none;
+  transition: 0.25s;
+}
+.customize .change-name input[type="text"]:focus {
+  width: 250px;
+}
+.customize button {
+  height: 40px;
+  width: 120px;
+  background: none;
+  border-radius: 24px;
+  border: 2px solid var(--globalColor);
+  cursor: pointer;
+  transition: 0.25s;
+}
+.customize button:hover {
+  background: var(--globalColor);
+  color: #ffffff;
 }
 @keyframes transition {
   0% {
@@ -308,6 +404,12 @@ td {
   }
   .game .hands i {
     font-size: 75px;
+  }
+  .customize .color-blocks {
+    flex-wrap: wrap;
+  }
+  .customize .color-blocks .block {
+    margin: 5px;
   }
 }
 @media only screen and (max-width: 370px) {
