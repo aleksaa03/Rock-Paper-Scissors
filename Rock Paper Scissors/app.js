@@ -85,8 +85,9 @@ function compareMove(playerMove, computerMove) {
     score.player = pScore;
     score.computer = cScore;
 
-    save(score);
-    saveRemovedScores(score);
+    save("score", score, "session");
+    save("removeScores", score, "session");
+    save("high-score", score, "local");
     sounds("win");
   }
 
@@ -95,8 +96,9 @@ function compareMove(playerMove, computerMove) {
     score.player = pScore;
     score.computer = cScore;
 
-    save(score);
-    saveRemovedScores(score);
+    save("score", score, "session");
+    save("removeScores", score, "session");
+    save("high-score", score, "local");
     sounds("lose");
   }
 
@@ -190,18 +192,29 @@ function key(e) {
   }
 }
 
-document.getElementById("name").addEventListener("keyup", key);
-
-function save(score) {
-  var scores = JSON.parse(sessionStorage.getItem("score")) || [];
-  scores.push(score);
-  sessionStorage.setItem("score", JSON.stringify(scores));
+if (localStorage.getItem("name") == null) {
+  enterName.innerHTML = `<div class="name">
+    <h1>Enter a name</h1>
+    <input type="text" name="" id="name" maxlength="10" />
+    <p>Press <kbd>Enter</kbd> to start</p>
+    </div>`;
 }
 
-function saveRemovedScores(score) {
-  var removeScores = JSON.parse(sessionStorage.getItem("removeScores")) || [];
-  removeScores.push(score);
-  sessionStorage.setItem("removeScores", JSON.stringify(removeScores));
+if (enterName.innerHTML != "") {
+  document.getElementById("name").addEventListener("keyup", key);
+}
+
+function save(name, score, typeStorage) {
+  var array;
+  if (typeStorage == "local") {
+    array = JSON.parse(localStorage.getItem(name)) || [];
+    array.push(score);
+    localStorage.setItem(name, JSON.stringify(array));
+  } else {
+    array = JSON.parse(sessionStorage.getItem(name)) || [];
+    array.push(score);
+    sessionStorage.setItem(name, JSON.stringify(array));
+  }
 }
 
 var scoresTable = document.getElementById("scores");
@@ -263,14 +276,21 @@ function exit() {
   scoresTable.style.display = "none";
 }
 
-var executeSound = false;
+var soundStorage = sessionStorage.getItem("sound");
+var executeSound;
+
+if (soundStorage == null || soundStorage == "volume-up") {
+  executeSound = false;
+} else {
+  executeSound = true;
+}
+
 var sound = document.querySelector(".sound");
 
 function sounds(getSound) {
   if (!executeSound) {
     var audio = new Audio("media/" + getSound + ".mp3");
     audio.play();
-    audio.volume = 0.5;
   }
 }
 
@@ -307,7 +327,7 @@ var colorBlocks = document.getElementById("color-blocks");
 var changeNameInput = document.getElementById("change-name");
 var colors = ["#000000", "#2ecc71", "#3498db", "#9b59b6", "#f1c40f", "#e74c3c"];
 
-function customize() {
+function options() {
   mainScreen.style.display = "none";
   customizeContainer.style.display = "block";
 
@@ -372,4 +392,47 @@ function saveColorHand(hand, savedColor) {
     hand.style.color = savedColor;
   }
   root.style.setProperty("--globalColor", savedColor);
+}
+
+function highScore() {
+  var highScoreText = document.getElementById("high-score");
+  var highScoreMedal = document.querySelectorAll(".medal");
+  var highScore = 0;
+
+  var highScoreSave = JSON.parse(localStorage.getItem("high-score"));
+
+  if (highScoreSave != null) {
+    for (var i = 0; i < highScoreSave.length; i++) {
+      highScore += parseInt(highScoreSave[i].player);
+    }
+  }
+
+  highScoreText.innerHTML = "High Score: " + highScore;
+
+  highScoreMedal.forEach((medal) => {
+    if (highScore < 50) {
+      medal.style.color = "#cd7f32";
+    } else if (highScore >= 50 && highScore < 200) {
+      medal.style.color = "#c0c0c0";
+    } else {
+      medal.style.color = "#ffd700";
+    }
+  });
+}
+
+highScore();
+
+function resetScore() {
+  localStorage.removeItem("high-score");
+  highScore();
+}
+
+var highScoreTableDiv = document.getElementById("high-score-table");
+
+function highScoreTable(click) {
+  if (click == "open") {
+    highScoreTableDiv.style.display = "block";
+  } else {
+    highScoreTableDiv.style.display = "none";
+  }
 }

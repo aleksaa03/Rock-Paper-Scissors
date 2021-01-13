@@ -6,15 +6,15 @@
     "display": "standalone",
     "icons": [
     {
-      "src": "media/rock.svg",
-      "type": "image/svg",
+      "src": "media/rock192.png",
+      "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "media/rock.svg",
-      "type": "image/svg",
+      "src": "media/rock512.png",
+      "type": "image/png",
       "sizes": "512x512"
     }
     ],
-    "start_url": "index.html"
+    "start_url": "."
   }

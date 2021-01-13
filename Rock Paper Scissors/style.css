@@ -5,6 +5,7 @@
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  -webkit-tap-highlight-color: transparent;
 }
 h1,
 h2 {
@@ -106,6 +107,7 @@ button {
 .main-screen .start button {
   height: 40px;
   width: 120px;
+  margin: 10px;
   border-radius: 24px;
   border: 2px solid var(--globalColor);
   cursor: pointer;
@@ -133,13 +135,14 @@ button {
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin-bottom: 50px;
+}
+.game .scores h2 {
+  margin: 10px;
 }
 .game .scores .player-score,
 .scores .computer-score {
   margin: 0 30px;
-}
-.game .scores {
-  margin-bottom: 50px;
 }
 .game .hands {
   margin: 20px 0;
@@ -183,9 +186,9 @@ button {
   font-size: 20px;
 }
 .winner .content .move,
-h2,
-i,
-button {
+.content h2,
+.content i,
+.content button {
   margin: 10px;
 }
 .winner .content .move {
@@ -259,6 +262,7 @@ td {
 .scoresTable .score .sum h2 {
   font-size: 20px;
   text-align: center;
+  margin: 10px;
 }
 .sounds {
   position: fixed;
@@ -269,12 +273,16 @@ td {
 }
 .sounds i {
   cursor: pointer;
-  color: #2ecc71;
+  color: var(--globalColor);
   outline: none;
+  margin: 10px;
 }
 .customize {
   display: none;
   text-align: center;
+}
+.customize h2 {
+  margin: 10px;
 }
 .customize .custom-hands,
 .customize .change-name {
@@ -316,6 +324,7 @@ td {
 .customize button {
   height: 40px;
   width: 120px;
+  margin: 10px;
   background: none;
   border-radius: 24px;
   border: 2px solid var(--globalColor);

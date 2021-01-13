@@ -13,15 +13,72 @@
     <link rel="shortcut icon" href="media/rock.svg" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
     <title>Rock Paper Scissors</title>
+    <style>
+      .high-score {
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        z-index: 1;
+        display: none;
+      }
+      .high-score .score {
+        height: 300px;
+        width: 300px;
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 5px;
+        text-align: center;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .high-score .score .high-score-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 10px;
+      }
+      .high-score .score i {
+        font-size: 30px;
+      }
+      .high-score .score h2 {
+        margin: 5px;
+        font-size: 20px;
+      }
+      .high-score .score .high-score-table {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 100px;
+      }
+      .high-score .score .high-score-table .bronze,
+      .high-score-table .silver,
+      .high-score-table .gold {
+        margin: 0 10px;
+      }
+      .high-score .score .high-score-table .bronze i {
+        color: #cd7f32;
+      }
+      .high-score .score .high-score-table .silver i {
+        color: #c0c0c0;
+      }
+      .high-score .score .high-score-table .gold i {
+        color: #ffd700;
+      }
+      #high-score-medal {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        margin: 20px;
+        font-size: 30px;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
-    <div class="enter-name" id="enter-name">
-      <div class="name">
-        <h1>Enter a name</h1>
-        <input type="text" name="" id="name" maxlength="10" />
-        <p>Press <kbd>Enter</kbd> to start</p>
-      </div>
-    </div>
+    <div class="enter-name" id="enter-name"></div>
     <div class="main-screen" id="main-screen">
       <h1>Rock, paper, scissors</h1>
       <div class="icons">
@@ -36,7 +93,7 @@
       </div>
       <div class="start">
         <button onclick="start()">Start</button>
-        <button onclick="customize()">Customize</button>
+        <button onclick="options()">Options</button>
       </div>
     </div>
     <div class="game" id="game">
@@ -95,8 +152,36 @@
         <h2>Change name</h2>
         <input type="text" name="" id="change-name" maxlength="10" />
       </div>
+      <div class="reset-high-score">
+        <h2>Reset High Score</h2>
+        <button onclick="resetScore()">Reset Score</button>
+      </div>
       <button onclick="saveChanges()">Save</button>
     </div>
+    <i class="fas fa-medal medal" id="high-score-medal" onclick="highScoreTable('open')"></i>
+    <div class="high-score" id="high-score-table" onclick="highScoreTable('close')">
+      <div class="score">
+        <div class="high-score-text">
+          <i class="fas fa-medal medal"></i>
+          <h2 id="high-score"></h2>
+        </div>
+        <div class="high-score-table">
+          <div class="bronze">
+            <i class="fas fa-medal"></i>
+            <h2>0 > 50</h2>
+          </div>
+          <div class="silver">
+            <i class="fas fa-medal"></i>
+            <h2>50 > 200</h2>
+          </div>
+          <div class="gold">
+            <i class="fas fa-medal"></i>
+            <h2>> 200</h2>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="app.js"></script>
+    <script src="src/index.js"></script>
   </body>
 </html>
