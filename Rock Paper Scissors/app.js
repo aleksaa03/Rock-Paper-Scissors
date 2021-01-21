@@ -325,6 +325,7 @@ if (savedSound == null || savedSound == "volume-up") {
 var customizeContainer = document.getElementById("customize");
 var colorBlocks = document.getElementById("color-blocks");
 var changeNameInput = document.getElementById("change-name");
+var colorPicker = document.getElementById("color");
 var colors = ["#000000", "#2ecc71", "#3498db", "#9b59b6", "#f1c40f", "#e74c3c"];
 
 function options() {
@@ -346,6 +347,27 @@ function options() {
   changeNameInput.value = localStorage.getItem("name");
 }
 
+function openChanger() {
+  colorPicker.click();
+}
+
+var customColorSelector = document.getElementById("color-picker");
+customColorSelector.style.color = localStorage.getItem("color");
+colorPicker.value = localStorage.getItem("color");
+
+function changeCustomColor() {
+  var color = colorPicker.value;
+  var r = parseInt(color.substr(1, 2), 16);
+  var g = parseInt(color.substr(3, 2), 16);
+  var b = parseInt(color.substr(5, 2), 16);
+
+  if (r < 240 || g < 235 || b < 215) {
+    setColor(colorPicker.value);
+  } else {
+    setColor("#000000");
+  }
+}
+
 var colorHand = document.querySelector(".color-hand");
 var playerHand = document.querySelectorAll(".player-hand");
 
@@ -354,6 +376,8 @@ function setColor(color) {
   localStorage.setItem("color", color);
   root.style.setProperty("--globalColor", color);
   sound.style.color = color;
+  customColorSelector.style.color = color;
+  colorPicker.value = color;
 }
 
 var root = document.documentElement;

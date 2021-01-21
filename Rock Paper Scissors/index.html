@@ -75,6 +75,25 @@
         font-size: 30px;
         cursor: pointer;
       }
+      .color-picker {
+        height: 50px;
+        width: 50px;
+        border-radius: 10px;
+        margin: auto;
+        text-align: center;
+      }
+      #color-picker {
+        transform: rotateZ(5deg);
+        font-size: 50px;
+        cursor: pointer;
+      }
+      #color {
+        position: absolute;
+        top: 50%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+        visibility: hidden;
+      }
     </style>
   </head>
   <body>
@@ -147,6 +166,10 @@
         <h2>Custom color</h2>
         <i class="fas fa-hand-rock color-hand"></i>
         <div class="color-blocks" id="color-blocks"></div>
+        <div class="color-picker" id="color-picker-block">
+          <i class="fas fa-eye-dropper" id="color-picker" onclick="openChanger()"></i>
+          <input type="color" name="" id="color" oninput="changeCustomColor()" />
+        </div>
       </div>
       <div class="change-name">
         <h2>Change name</h2>
