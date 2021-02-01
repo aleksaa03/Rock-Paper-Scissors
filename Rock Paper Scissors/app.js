@@ -89,6 +89,7 @@ function compareMove(playerMove, computerMove) {
     save("removeScores", score, "session");
     save("high-score", score, "local");
     sounds("win");
+    navigator.vibrate(300);
   }
 
   if (cScore == maxScore) {
@@ -100,6 +101,7 @@ function compareMove(playerMove, computerMove) {
     save("removeScores", score, "session");
     save("high-score", score, "local");
     sounds("lose");
+    navigator.vibrate(300);
   }
 
   pScoreText.innerHTML = pScore;
